@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Better Bettor - For your Best Bet</title>
+        <link rel="icon" type="image/x-icon" href="/static/img/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="/static/css/styles.css" rel="stylesheet" />
+        <script src="/static/js/scripts.js"></script>
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="#page-top">Better Bettor</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="/#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/predict">Predict</a></li>
+                        {% if current_user.is_authenticated %}
+                            <li class="nav-item"><a class="nav-link" href="/logout">Sign out</a></li>
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link" href="/login">Sign In</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Projects-->
+        <section class="projects-section" id="predict">
+            <div class="container px-4 px-lg-5">
+                <!-- Featured Project Row-->
+                <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
+                {% if not current_user.is_authenticated %}
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-lg-8">
+                            <h2 class="text-white mb-4">Aren't you the member of Better Bettor yet?</h2>
+                            <p class="text-white-50">
+                                Sign up and enjoy the wonderful prediction of Every Football match in English Premier League!
+                                <a href="/login">이 곳에서 회원가입을 할 수 있습니다.</a>
+                            </p>
+                        </div>
+                    </div>
+                {% else %}
+                    <div id="home_img" class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="/static/img/bg.jpg" alt="..." /></div>
+                    <div class="col-xl-4 col-lg-5">
+                        <div class="featured-text text-center text-lg-left">
+                            <!-- <h4>HomeTeam name</h4> -->
+                            <h4 id="home_name" class="text-white"></h4>
+                            <!-- <p class="text-black-50 mb-0">Home Team description</p> -->
+                            <p class="mb-0 text-white-50">Home Team description</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project One Row-->
+                <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
+                    <form id = inputBox action="/get-prediction" method="post" target="iframe1">
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                          <label class="text-white">Home Team</label>
+                          <!-- <input type="text" class="form-control" id="home" name="home" placeholder="Enter Home Team Name"> -->
+                          <select onchange="handleOnChange2(this)" class="form-control" id="home" name="home" placeholder="Enter Home Team Name">
+                            <option>Arsenal</option>
+                            <option>Aston Villa</option>
+                            <option>Birmingham</option>
+                            <option>Blackburn</option>
+                            <option>Blackpool</option>
+                            <option>Bolton</option>
+                            <option>Bournemouth</option>
+                            <option>Bradford</option>
+                            <option>Brentford</option>
+                            <option>Brighton</option>
+                            <option>Burnley</option>
+                            <option>Cardiff</option>
+                            <option>Charlton</option>
+                            <option>Chelsea</option>
+                            <option>Coventry</option>
+                            <option>Crystal Palace</option>
+                            <option>Derby</option>
+                            <option>Everton</option>
+                            <option>Fulham</option>
+                            <option>Huddersfield</option>
+                            <option>Hull</option>
+                            <option>Ipswich</option>
+                            <option>Leeds</option>
+                            <option>Leicester</option>
+                            <option >Liverpool</option>
+                            <option>Man City</option>
+                            <option>Man United</option>
+                            <option>Middlesbrough</option>
+                            <option>Newcastle</option>
+                            <option>Norwich</option>
+                            <option>Portsmouth</option>
+                            <option>QPR</option>
+                            <option>Reading</option>
+                            <option>Sheffield United</option>
+                            <option>Southampton</option>
+                            <option>Stoke</option>
+                            <option>Sunderland</option>
+                            <option>TottenhamSwansea</option>
+                            <option>Watford</option>
+                            <option>West Brom</option>
+                            <option>West Ham</option>
+                            <option>Wigan</option>
+                            <option>Wolves</option>
+                          </select>
+                          <!-- <small id="emailHelp" class="form-text text-muted">Home Team</small> -->
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                          <label class="text-white">Away Team</label>
+                          <!-- <input type="text" class="form-control" id="away" name="away" placeholder="Away Team"> -->
+                          <select onchange="handleOnChange(this)" class="form-control" id="away" name="away" placeholder="Enter Away Team Name">
+                            <option>Arsenal</option>
+                            <option>Aston Villa</option>
+                            <option>Birmingham</option>
+                            <option>Blackburn</option>
+                            <option>Blackpool</option>
+                            <option>Bolton</option>
+                            <option>Bournemouth</option>
+                            <option>Bradford</option>
+                            <option>Brentford</option>
+                            <option>Brighton</option>
+                            <option>Burnley</option>
+                            <option>Cardiff</option>
+                            <option>Charlton</option>
+                            <option>Chelsea</option>
+                            <option>Coventry</option>
+                            <option>Crystal Palace</option>
+                            <option>Derby</option>
+                            <option>Everton</option>
+                            <option>Fulham</option>
+                            <option>Huddersfield</option>
+                            <option>Hull</option>
+                            <option>Ipswich</option>
+                            <option>Leeds</option>
+                            <option>Leicester</option>
+                            <option>Liverpool</option>
+                            <option>Man City</option>
+                            <option>Man United</option>
+                            <option>Middlesbrough</option>
+                            <option>Newcastle</option>
+                            <option>Norwich</option>
+                            <option>Portsmouth</option>
+                            <option>QPR</option>
+                            <option>Reading</option>
+                            <option>Sheffield United</option>
+                            <option>Southampton</option>
+                            <option>Stoke</option>
+                            <option>Sunderland</option>
+                            <option>TottenhamSwansea</option>
+                            <option>Watford</option>
+                            <option>West Brom</option>
+                            <option>West Ham</option>
+                            <option>Wigan</option>
+                            <option>Wolves</option>
+                          </select>
+                        </div>
+
+
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                          <label for="coeff" class="text-white">계수</label>
+                          <select class="form-control" name="coeff" id="exampleFormControlSelect1">
+                            <option>0.1</option>
+                            <option>0.2</option>
+                            <option>0.3</option>
+                            <option>0.4</option>
+                            <option>0.5</option>
+                          </select>
+                        </div>
+
+                        <button type="submit" value="결과" class="btn btn-success">승부예측!</button>
+                      </form>
+                    <iframe name="iframe1" id="resultBox"></iframe>
+
+                    <!-- 바차트 연습 -->
+
+                    <!-- 바차트 연습 -->
+
+
+                   <!-- <div class="col-lg-6"><img class="img-fluid" src="/static/img/Liverpool.jpeg" alt="..." /></div>
+                   <div class="col-lg-6">
+                       <div class="bg-black text-center h-100 project">
+                           <div class="d-flex h-100">
+                               <div class="project-text w-100 my-auto text-center text-lg-left">
+                                   <h4 class="text-white">Misty</h4>
+                                   <p class="mb-0 text-white-50">An example of where you can put an image of a project, or anything else, along with a description.</p>
+                                   <hr class="d-none d-lg-block mb-0 ms-0" />
+                               </div>
+                           </div>
+                       </div>
+                   </div> -->
+
+                </div>
+                <!-- Project Two Row-->
+                <div class="row gx-0 justify-content-center">
+                    <div class="col-lg-6"><img class="img-fluid" src="/static/img/image1.jpg" alt="..." /></div>
+                    <div class="col-lg-6 order-lg-first">
+                        <div class="bg-black text-center h-100 project">
+                            <div class="d-flex h-100">
+                                <div class="project-text w-100 my-auto text-center text-lg-right">
+                                    <!-- <h4 class="text-white">Away Team</h4> -->
+                                    <h4 id="away_name" class="text-white"></h4>
+                                    <p class="mb-0 text-white-50">Away Team description</p>
+                                    <hr class="d-none d-lg-block mb-0 me-0" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- 바차트 연습 -->
+                <!-- <div class="graph">
+                    <section class="bar-graph bar-graph-horizontal bar-graph-one">
+                        <div class="bar-away">
+                            <div class="bar" data-percentage='50.76%'></div>
+                        </div>
+                        <div class="bar-home">
+                            <div class="bar" data-percentage='49.24%'></div>
+                        </div>
+                    </section>
+                <div> -->
+
+            </div>
+            {% endif %}
+        </section>
+        <!-- Footer-->
+        <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; Better Bettor 2022</div></footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    </body>
+</html>

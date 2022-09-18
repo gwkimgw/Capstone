@@ -1,0 +1,116 @@
+/* 그래프 시작 */
+
+
+/* 그래프 전체적 애니메이션 설정*/
+.bar-graph .year {
+    -webkit-animation: fade-in-text 2.2s 0.1s forwards;
+    -moz-animation: fade-in-text 2.2s 0.1s forwards;
+  
+    animation: fade-in-text 2.2s 0.1s forwards;
+    opacity: 0;
+  }
+  
+  /*막대그래프를 담고있는 영역 설정*/
+  .bar-graph-horizontal {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+  
+  /*각 그래프의 위치설정*/
+  .bar-graph-horizontal .bar-away{
+    float: left;
+    margin-bottom: 8px;
+    display:contents;
+  }
+  .bar-graph-horizontal .bar-home{
+    float: right;
+    margin-bottom: 8px;
+     display:contents;
+  }
+  
+  /*각 그래프의 모양 설정*/
+  .bar-graph-horizontal .bar-away .bar {
+    border-radius: 3px;
+    height: 55px;
+    float: left;
+    overflow: hidden;
+    position: relative;
+    width: 0;
+  }
+  
+  .bar-graph-horizontal .bar-home .bar {
+    border-radius: 3px;
+    height: 55px;
+    float: right;
+    overflow: hidden;
+    position: relative;
+    width: 0;
+  }
+  
+  /*그래프 위의 글자 설정 필수 아님*/
+  .bar-graph-one .bar-away .bar::after {
+    -webkit-animation: fade-in-text 2.2s 0.1s forwards;
+    -moz-animation: fade-in-text 2.2s 0.1s forwards;
+    animation: fade-in-text 2.2s 0.1s forwards;
+    color: #fff;
+    content: attr(data-percentage);
+    font-weight: 700;
+    position: absolute;
+    right: 16px;
+    top: 17px;
+  }
+  
+  .bar-graph-one .bar-home .bar::after {
+   -webkit-animation: fade-in-text 2.2s 0.1s forwards;
+    -moz-animation: fade-in-text 2.2s 0.1s forwards;
+    animation: fade-in-text 2.2s 0.1s forwards;
+    color: #fff;
+    content: attr(data-percentage);
+    font-weight: 700;
+    position: absolute;
+    left: 16px;
+    top: 17px;
+  }
+  
+  .bar-graph-one .bar-away .bar {
+    -webkit-animation: show-bar-one 1.2s 0.1s forwards;
+    -moz-animation: show-bar-one 1.2s 0.1s forwards;
+    background-color: #b34332;
+    animation: show-bar-one 1.2s 0.1s forwards;
+  }
+  
+  .bar-graph-one .bar-home .bar {
+    -webkit-animation: show-bar-two 1.2s 0.2s forwards;
+    -moz-animation: show-bar-two 1.2s 0.2s forwards;
+    background-color: #4660a1;
+    animation: show-bar-two 1.2s 0.2s forwards;
+  }
+  
+     /* Bar Graph Horizontal Animations */
+  @-webkit-keyframes show-bar-one {
+    0% {
+      width: 0;
+    } 100%{
+      width: var(--home-graph-width);
+    }
+  }
+  
+  @-webkit-keyframes show-bar-two {
+    0% {
+      width: 0;
+    }100% {
+    width: 68%;
+    }
+  
+  }
+  
+      /*글씨 투명도설정*/
+  @-webkit-keyframes fade-in-text {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  /* 그래프 끝 */
